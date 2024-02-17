@@ -1,4 +1,7 @@
+import { Btn } from 'components/Button/Button'
 import {Component} from 'react'
+import { CgPlayListAdd } from "react-icons/cg";
+
 
 
 export class TodoEditor extends Component{
@@ -9,7 +12,7 @@ state={
 
 onFormSubmit=(event)=>{
     event.preventDefault()
-    this.props.adToDo(event.currentTarget.elements.goal.value)
+    this.props.addToDo(event.currentTarget.elements.goal.value)
     this.setState({goal: ''})
 }
 
@@ -22,7 +25,7 @@ onTextareaClick=(event)=>{
     return(
         <form onSubmit={this.onFormSubmit} >
             <textarea name="goal" value={this.state.goal} onChange={this.onTextareaClick}></textarea>
-            <button type="submit"></button>
+            <Btn type="submit"><CgPlayListAdd /></Btn>
         </form>
     )}
 }

@@ -2,8 +2,15 @@ import React from "react"
 import {TodoList} from "./TodoList/TodoList"
 import {Component} from "react"
 import initialTodos from "../todo.json"
+import {Modal} from "./Modal/Modal.jsx"
 import {TodoEditor} from "./TodoList/TodoEditor"
 import { nanoid } from "nanoid"
+import {Btn} from "./Button/Button"
+import { FaPlus } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
+import { Filter } from "./Filter/Filter"
+
+
 
 export class App extends Component{
 
@@ -12,6 +19,12 @@ export class App extends Component{
       todos: initialTodos,
       filter: '',
   
+  }
+
+  changeFilter=(e)=>{
+    this.setState({
+      filter:e.currentTarget.value
+    })
   }
 
 deleteTodo=(todoId)=>{
@@ -45,6 +58,8 @@ toggleCompleted = (todoId) => {
         todos:[newToDo, ...prevState.todos]
       }
     })
+
+    this.toggleModal()
   }
 
   componentDidUpdate(prevState){
@@ -59,13 +74,27 @@ toggleCompleted = (todoId) => {
   }
   }
 
+  toggleModal = () => {
+    this.setState(prev=>({showModal: !prev.showModal}))
+    }
+  visibleTask=()=>{
+   return this.state.todos.filter(toDo=>toDo.text.toLowerCase().includes(this.state.filter.toLowerCase()))
+  }
   render(){
+    const visibleTask =this.visibleTask()
     return (
+      
       <div>
+       <Btn type="button" onClick={this.toggleModal}><FaPlus size={40}/></Btn>
+{this.state.showModal && <Modal onClose={this.toggleModal}>
+<Btn type="button" onClick={this.toggleModal}><IoMdClose /></Btn>
+<TodoEditor addToDo={this.addToDo}/>
+<Filter value={this.state.filter}  onChange={this.changeFilter}></Filter>
+<p>Напишіть свою задачу</p>
+</Modal>}
        
-       {/* <TodoEditor addToDo={this.addToDo}/>
-      <TodoList todos={this.state.todos} onDelete={this.deleteTodo}
-      onToggleCompiled={this.toggleCompleted}/> */}
+      <TodoList todos={visibleTask} onDelete={this.deleteTodo}
+      onToggleCompeled={this.toggleCompleted}/>
       </div>
     )}
 };

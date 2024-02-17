@@ -14,7 +14,7 @@ export function ToDo({ todoId, text, completed, onDelete, toggleCompleted }){
     <li>
         <input type="checkbox" name="" id="" checked={completed} onChange={handleChange}/>
         <p>{text}</p>
-        <buttonm type="button" onClick={handleDelete} >Delete</buttonm>
+        <button type="button" onClick={handleDelete} >Delete</button>
     </li>
 
    )
