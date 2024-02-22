@@ -1,4 +1,4 @@
-import {Button} from "./button.styled"
+import {Button} from "./Button.styled"
 
 
 export const Btn =({children=null, onClick})=>{

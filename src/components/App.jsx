@@ -89,10 +89,10 @@ toggleCompleted = (todoId) => {
 {this.state.showModal && <Modal onClose={this.toggleModal}>
 <Btn type="button" onClick={this.toggleModal}><IoMdClose /></Btn>
 <TodoEditor addToDo={this.addToDo}/>
+
+</Modal>}
 <Filter value={this.state.filter}  onChange={this.changeFilter}></Filter>
 <p>Напишіть свою задачу</p>
-</Modal>}
-       
       <TodoList todos={visibleTask} onDelete={this.deleteTodo}
       onToggleCompeled={this.toggleCompleted}/>
       </div>
